@@ -1,10 +1,11 @@
 const word_el = document.getElementById('word');
+const popup = document.getElementById('popup-container')
 
-const correctLetters =['j','a','v','s','g'];
+const correctLetters =['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 const wrongLetters = [];
 
 function getRandomWord(){
-    const words = ["Python", "JavaScript", "PHP", "Java", "Ruby", "Swift", "C#", "Go", "Kotlin", "TypeScript", "Dart", "Rust", "Lua", "Perl", "Scala", "R", "MATLAB", "Erlang"];
+    const words = ["Python", "JavaScript", "PHP", "Java", "Ruby", "Swift", "C#", "Go", "kotlin", "typescript", "dart", "rust", "lua", "perl", "Scala", "R", "MATLAB", "Erlang"];
     return words[Math.floor(Math.random() * words.length)];
 }
 
@@ -21,7 +22,7 @@ function displayWord(){
 
     const w = word_el.innerText.replace(/\n/g,'');
     if(w === selectedWord){
-        console.log('you won');
+        popup.style.display = 'flex';
     }
     
 
