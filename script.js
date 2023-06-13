@@ -1,16 +1,18 @@
 const word_el = document.getElementById('word');
 const popup = document.getElementById('popup-container')
+const message_el = document.getElementById('success-message')
 
-const correctLetters =['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+const correctLetters =['a', 'b', 'c'];
 const wrongLetters = [];
+const selectedWord = getRandomWord();
 
 function getRandomWord(){
-    const words = ["Python", "JavaScript", "PHP", "Java", "Ruby", "Swift", "C#", "Go", "kotlin", "typescript", "dart", "rust", "lua", "perl", "Scala", "R", "MATLAB", "Erlang"];
+    const words = ["python", "javascript", "php", "java", "ruby", "swift", "go", "kotlin", "typescript", "dart", "rust", "lua", "perl", "scala"];
     return words[Math.floor(Math.random() * words.length)];
 }
 
 function displayWord(){
-    const selectedWord = getRandomWord();
+    
 
     word_el.innerHTML = `
         ${selectedWord.split('').map(letter => `
@@ -23,9 +25,37 @@ function displayWord(){
     const w = word_el.innerText.replace(/\n/g,'');
     if(w === selectedWord){
         popup.style.display = 'flex';
+        message_el.innerText = 'Congratulations You Won'
     }
     
 
 }
+
+
+window.addEventListener('keydown', function(e){
+    let key = e.key.toLowerCase();
+    if (/^[a-zA-ZğüşıöçĞÜŞİÖÇ]$/.test(key)) {
+        const letter = e.key;
+
+        if(selectedWord.includes(letter)){
+            if(!correctLetters.includes(letter)){
+                correctLetters.push(letter);
+                displayWord()
+            }else{
+               console.log("you have already added this letter.")
+            }
+        }else{
+            if(!wrongLetters.includes(letter)){
+                wrongLetters.push(letter);
+                // hatalı harfleri güncelle
+            }
+        }
+    }
+});
+
+
+
+
+
 
 displayWord();
