@@ -4,11 +4,12 @@ const message_el = document.getElementById('success-message');
 const wrongLetters_el = document.getElementById('wrong-letters');
 const items = document.querySelectorAll('.item');
 const message = document.getElementById('message');
+const playAgeinBtn = document.getElementById('play-agein')
 
 const correctLetters =[];
 const wrongLetters = [];
 
-const selectedWord = getRandomWord();
+let selectedWord = getRandomWord();
 
 function getRandomWord(){
     const words = ["python", "javascript", "php", "java", "ruby", "swift", "go", "kotlin", "typescript", "dart", "rust", "lua", "perl", "scala"];
@@ -62,6 +63,17 @@ function displayMessage(){
         message.classList.remove('show')
     }, 2000)
 }
+
+playAgeinBtn.addEventListener('click', function() {
+    correctLetters.splice(0);
+    wrongLetters.splice(0);
+
+    selectedWord = getRandomWord();
+    displayWord();
+    updateWrongLetters();
+
+    popup.style.display = 'none';
+  })
 
 window.addEventListener('keydown', function(e){
     let key = e.key.toLowerCase();
